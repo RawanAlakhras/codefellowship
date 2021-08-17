@@ -4,10 +4,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class ApplicationUser implements UserDetails {
+public class ApplicationUser<List> implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +20,19 @@ public class ApplicationUser implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user" , cascade = CascadeType.ALL)
+    private ArrayList<Post> posts;
+
+    public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio, ArrayList<Post> posts) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.bio = bio;
+        this.posts = posts;
+    }
 
     public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
         this.username = username;
@@ -49,6 +64,14 @@ public class ApplicationUser implements UserDetails {
 
     public String getBio() {
         return bio;
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
     }
 
     public void setUsername(String username) {
