@@ -31,18 +31,31 @@
 8. run the application by IDE then go to your browser and write <http://localhost:8080/>.
 9. now you are in the home page from navbar click on signup .
 10. write all your information then submit.
-11. login using your username and pass.
+11. you can login using your username and pass.
 12. the profile page now dispaly in navbar click in it to see your info.
+13. from profile page you can add new post and you can see your previous post in it.
+
+* you can see user’s username on every page ( in the navbar) after login.
+* The site have a non-whitelabel error handling page.
 
 # API
 
 ## GET requests
 
-* / to show the home page
-* /signup shows the signup page
-* /login show the login page
-* /profile shows the profile of the logged user
+* / </br>
+to show the home page
+* /signup </br>
+shows the signup page
+* /login </br>
+show the login page
+* /profile </br>
+shows the profile of the logged user and your post .
+* <http://localhost:8080/users/{id>} </br>
+which allows viewing the data about a single ApplicationUser by write their id .
 
 ## POST requests
 
-* /signup Gets the user credientials and signs up his data to the data base and authorize the user.
+* /signup </br>
+Gets the user credientials and signs up his data to the data base and authorize the user.
+* /addpost </br>
+get the body of the post from form and store it in database.

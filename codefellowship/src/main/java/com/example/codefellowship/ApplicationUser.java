@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class ApplicationUser<List> implements UserDetails {
+public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,11 +20,11 @@ public class ApplicationUser<List> implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user" , cascade = CascadeType.ALL)
-    private ArrayList<Post> posts;
 
-    public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio, ArrayList<Post> posts) {
+    public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio, List<Post> posts) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -66,12 +66,12 @@ public class ApplicationUser<List> implements UserDetails {
         return bio;
     }
 
-    public ArrayList<Post> getPosts() {
-        return posts;
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
-    public void setPosts(ArrayList<Post> posts) {
-        this.posts = posts;
+    public List<Post> getPosts() {
+        return posts;
     }
 
     public void setUsername(String username) {

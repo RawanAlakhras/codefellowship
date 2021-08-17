@@ -30,6 +30,14 @@ public class Post {
         this.createdAt = createdAt;
     }
 
+    public void setUser(ApplicationUser user) {
+        this.user = user;
+    }
+
+    public ApplicationUser getUser() {
+        return user;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -42,13 +50,13 @@ public class Post {
         this.createdAt = createdAt;
     }
 
-    public void setUser(ApplicationUser user) {
-        this.user = user;
-    }
-
-    public ApplicationUser getUser() {
-        return user;
-    }
+//    public void setUser(ApplicationUser user) {
+//        this.user = user;
+//    }
+//
+//    public ApplicationUser getUser() {
+//        return user;
+//    }
 
     public Long getId() {
         return id;
