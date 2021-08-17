@@ -37,6 +37,9 @@
 
 * you can see user’s username on every page ( in the navbar) after login.
 * The site have a non-whitelabel error handling page.
+* users can follow other users from Discover people tab (in navbar).
+* you can see what all of your followed users have posted recently.
+* A user can visit a url (like /feed) to view all of the posts from the users that they follow.
 
 # API
 
@@ -59,3 +62,7 @@ which allows viewing the data about a single ApplicationUser by write their id .
 Gets the user credientials and signs up his data to the data base and authorize the user.
 * /addpost </br>
 get the body of the post from form and store it in database.
+* /follow/{id} </br>
+to follow user 
+* /unfollow/{id} </br>
+to unfollow user 

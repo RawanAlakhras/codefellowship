@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<!--start navbar-->
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<!--end navbar-->
+<div class="container pt-5 mt-5">
+    <div class="row row-cols-3">
+        <div th:each="user : ${users}">
+            <div th:if="${logedinUser.getId} != ${user.getId()}" class="card" style="width: 18rem;">
+                <img src="/avatar.png" th:src="@{/avatar.png}" th:alt="avatar" class="card-img-top" />
+                <div class="card-body">
+                    <a class="name" th:href="@{getUser/{id} (id= ${user.getId()})}" th:text="${user.getUsername()}"></a>
+                    <h5 class="card-title" th:text="${user.getFirstName()} +' '+ ${user.getLastName()}"></h5>
+                    <p class="card-text" th:text="${user.getBio()}"></p>
+
+                    <!-- IF CUSTOMER IS ANONYMOUS -->
+                    <div th:if="${logedinUser.isFollowing(user)}">
+                        <form action="#" th:action="@{unfollow/{id}(id = ${user.getId()})}" method="post" >
+                            <button type="submit" class="btn btn-outline-warning" th:text="unFollow"></button>
+                        </form>
+
+                    </div>
+                    <!-- ELSE -->
+                    <div th:unless="${logedinUser.isFollowing(user)}">
+                        <form th:action="@{follow/{id}(id = ${user.getId()})}" method="post" >
+                            <button type="submit" class="btn btn-warning" th:text="Follow"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+</body>
+</html>

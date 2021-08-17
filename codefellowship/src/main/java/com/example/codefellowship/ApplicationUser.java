@@ -23,6 +23,13 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
+    @ManyToMany
+    @JoinTable(name ="following",
+    joinColumns= { @JoinColumn(name = "user_id",referencedColumnName = "id", nullable = false)},
+    inverseJoinColumns= {@JoinColumn(name = "following_user_id", referencedColumnName = "id", nullable = false)}
+    )
+    private List<ApplicationUser> followingUsers = new ArrayList<>();
+
 
     public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio, List<Post> posts) {
         this.username = username;
@@ -50,6 +57,24 @@ public class ApplicationUser implements UserDetails {
     public ApplicationUser() {
 
     }
+
+    public List<ApplicationUser> getFollowingUsers() {
+        return followingUsers;
+    }
+
+    public void setFollowingUsers(List<ApplicationUser> followingUsers) {
+        this.followingUsers = followingUsers;
+    }
+    public void addUserToFollow(ApplicationUser user){
+        this.followingUsers.add(user);
+    }
+    public void removeUserFromFollow(ApplicationUser user){
+        this.followingUsers.remove(user);
+    }
+    public Boolean isFollowing(ApplicationUser user){
+        return this.followingUsers.contains(user);
+    }
+
     public String getFirstName() {
         return firstName;
     }

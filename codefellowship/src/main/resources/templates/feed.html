@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-5">
+    <div class="feeds-box">
+        <h1 class="text-center w-100">Feeds</h1>
+        <div class="w-100 h-100" th:each="user : ${feeds.getFollowingUsers()}">
+            <div class="single-post" th:each="post : ${user.getPosts()}">
+                <a class="name" th:href="@{getUser/{id} (id= ${user.getId()})}" th:text="${user.getUsername()}"></a>
+                <p class="body" th:text="${post.getBody()}"></p>
+                <p class="time" th:text="${post.getCreatedAt}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>
