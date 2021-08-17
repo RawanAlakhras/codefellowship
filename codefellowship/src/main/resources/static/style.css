@@ -51,3 +51,21 @@
 .profile-text h4 span{
     color: #232323;
 }
+.nav-img{
+    border-radius: 50%;
+
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+.user-img{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.user-img a{
+    color: #FFCA2C;
+    font-weight: bold;
+}
+

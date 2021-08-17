@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--start navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3" th:fragment="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="#">CodeFellowship</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item" sec:authorize = "isAuthenticated()">
+                    <a class="nav-link" href="/profile">profile</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav w-15">
+                <li class="nav-item me-1" sec:authorize = "!isAuthenticated()">
+                    <form action="/signup" method="get">
+                        <input type="submit" value="signup" class="btn btn-warning">
+                    </form>
+                </li>
+                <li class="nav-item" sec:authorize = "!isAuthenticated()">
+                    <form action="/login" method="get">
+                        <input type="submit" value="login" class="btn btn-warning">
+                    </form>
+                </li>
+
+                <li class="nav-item user-img" sec:authorize ="isAuthenticated()">
+                    <img  src="/avatar.png" th:src="@{/avatar.png}" th:alt="avatar" class="nav-img"/>
+                    <a class="nav-link" href="/profile" sec:authentication="name"></a>
+                </li>
+                <li class="nav-item user-img" sec:authorize = "isAuthenticated()">
+                    <form action="/perform_logout" method="post">
+                        <input type="submit" value="logout" class="btn btn-warning">
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--end navbar-->
+</body>
+</html>
