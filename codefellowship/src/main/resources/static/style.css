@@ -117,6 +117,8 @@
 .single-post .name{
     font-weight: bolder;
     font-size: 1.5rem;
+    color: #232323;
+    text-decoration: none;
 
 }
 .single-post .body{
@@ -141,6 +143,16 @@
     border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
+}
+.feeds-box{
+    width: 70%;
+    height: max-content;
+    box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+    padding: 5vh 5vw;
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    margin: auto;
 }
 
 

@@ -68,4 +68,42 @@ public class ApplicationUserController {
         m.addAttribute("user", applicationUserRepository.findById(id).get());
         return "userSearch.html";
     }
+
+    @GetMapping ("/allUser")
+    public String getAllUsers(Model m,Principal p){
+        ApplicationUser getUser=applicationUserRepository.findByUsername(p.getName());
+
+        m.addAttribute("users",applicationUserRepository.findAll());
+        m.addAttribute("logedinUser",getUser);
+        return "allUser.html";
+    }
+
+    @PostMapping("/follow/{id}")
+    public RedirectView followUser(Principal p,@PathVariable Long id){
+        ApplicationUser getUser=applicationUserRepository.findByUsername(p.getName());
+       ApplicationUser user=applicationUserRepository.findById(id).get();
+       getUser.addUserToFollow(user);
+       applicationUserRepository.save(getUser);
+        return new RedirectView("/allUser");
+    }
+    @PostMapping("/unfollow/{id}")
+    public RedirectView unfollowUser(Principal p,@PathVariable Long id){
+        ApplicationUser getUser=applicationUserRepository.findByUsername(p.getName());
+        ApplicationUser user=applicationUserRepository.findById(id).get();
+        getUser.removeUserFromFollow(user);
+        applicationUserRepository.save(getUser);
+        return new RedirectView("/allUser");
+    }
+    @GetMapping("/feed")
+    public String getFeed(Principal p,Model m){
+        m.addAttribute("feeds",applicationUserRepository.findByUsername(p.getName()));
+        return "feed.html";
+    }
+    @GetMapping("/getUser/{id}")
+    public String getuser(@PathVariable Long id, Model m){
+        m.addAttribute("user",applicationUserRepository.findById(id).get());
+        return "userProfile.html";
+    }
+
+
 }
